@@ -18,6 +18,12 @@ module.exports = {
 
     }
 
+  },
+
+  paths : {
+
+    artificats : "./frontend/src/artifacts"
+
   }
 
 };
