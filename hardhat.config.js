@@ -2,7 +2,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 require('dotenv').config();
 
-const polygonURL = process.env.PLOYGON_URL;
+const polygonURL = process.env.POLYGON_URL;
 
 const account = process.env.PRIVATE_KEY;
 
@@ -13,7 +13,7 @@ module.exports = {
 
     mumbai : {
 
-      url : polygonURL,
+      url : `${polygonURL}`,
       accounts : [account]
 
     }
@@ -22,7 +22,7 @@ module.exports = {
 
   paths : {
 
-    artificats : "./frontend/src/artifacts"
+    artifacts : "./frontend/src/artifacts"
 
   }
 
