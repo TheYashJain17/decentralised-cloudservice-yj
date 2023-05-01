@@ -9,13 +9,10 @@ import FileUpload from './Components/FileUpload';
 import Display from './Components/Display';
 
 import Modal from './Components/Modal';
+
 import { useEffect, useState } from 'react';
 
 function App() {
-
-  const contractAddress = "0x7C3DaDBE6a3c9A5897b3355B0E7d8302eC9ce5A0";
-
-  const ABI = Artifacts.abi;
 
   const [account , setAccount] = useState('');
 
@@ -25,50 +22,67 @@ function App() {
 
   const [modalOpen , setModalOpen] = useState(false);
 
+  const {ethereum} = window;
+
+
+  const connectWallet = async() => {
+
+    try {
+
+      
+      if(ethereum){
+
+        const account = await ethereum.request({method : "eth_requestAccounts"});
+
+        setAccount(account);
+
+      }
+
+      
+    } catch (error) {
+      
+      console.log(error.message)
+
+    }
+  }
 
   useEffect(() => {
 
-    const {ethereum} = window;
+    const getContractInstance = async() => {
 
-    const provider = new ethers.providers.Web3Provider(ethereum);
+    const contractAddress = "0x7C3DaDBE6a3c9A5897b3355B0E7d8302eC9ce5A0";
+    
+    const ABI = Artifacts.abi;
 
-    const loadProvider = async() => {
 
-        if(provider){
+    if(ethereum && account!=0){  
 
-          await provider.send('eth_requestAccounts' , []);
+      const provider = new ethers.providers.Web3Provider(ethereum);
 
-          const signer = await provider.getSigner();
+      const signer = await provider.getSigner();
+  
+      const contract = new ethers.Contract(contractAddress , ABI , signer);
 
-          const address = await signer.getAddress();
+      setContract(contract);
 
-          setAccount(address);
+      setProvider(provider);
 
-          const contract = new ethers.Contract(contractAddress , ABI , signer);
-
-          setContract(contract);
-
-          console.log(contract);
-
-          setProvider(provider);
-
-        }
-        else{
-
-          alert("Please Install Metamask")
-
-        }
+      console.log(account , provider , contract);
 
     }
 
-   provider && loadProvider();
+  }
 
-  } , [])
+  getContractInstance();
+    
+
+  } , [account]);
+ 
 
   return (
     <>
     
-
+    <button onClick={connectWallet}>Connect Wallet</button>
     
     </>
   );
