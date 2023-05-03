@@ -95,8 +95,6 @@ function App() {
 
       </span>
 
-      {/* Connect Wallet */}
-
     </button>
 
     
