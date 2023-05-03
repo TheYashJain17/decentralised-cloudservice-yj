@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [account , setAccount] = useState('');
+  const [account , setAccount] = useState("");
 
   const [contract , setContract] = useState(null);
 
@@ -27,65 +27,83 @@ function App() {
 
   const connectWallet = async() => {
 
-    try {
+    if(ethereum){
 
-      
-      if(ethereum){
+      const accounts = await ethereum.request({method : "eth_requestAccounts"});
 
-        const account = await ethereum.request({method : "eth_requestAccounts"});
-
-        setAccount(account);
-
-      }
-
-      
-    } catch (error) {
-      
-      console.log(error.message)
+      setAccount(accounts[0]);
 
     }
+
   }
 
-  useEffect(() => {
 
-    const getContractInstance = async() => {
+  const getContractInstance = async() => {
 
-    const contractAddress = "0x7C3DaDBE6a3c9A5897b3355B0E7d8302eC9ce5A0";
-    
-    const ABI = Artifacts.abi;
+    if(ethereum && account != 0){
 
+      const contractAddress = "0x7C3DaDBE6a3c9A5897b3355B0E7d8302eC9ce5A0";
 
-    if(ethereum && account!=0){  
+      const ABI = Artifacts.abi;
 
       const provider = new ethers.providers.Web3Provider(ethereum);
 
       const signer = await provider.getSigner();
-  
+
       const contract = new ethers.Contract(contractAddress , ABI , signer);
 
       setContract(contract);
 
       setProvider(provider);
 
-      console.log(account , provider , contract);
+      console.log(contract , signer , account);
 
     }
 
   }
 
-  getContractInstance();
-    
+  useEffect(() => {
+
+    window.ethereum.on("accountChanged" , (accounts) => {
+
+      setAccount(accounts[0]);
+
+    })
+
+    getContractInstance();
+
 
   } , [account]);
- 
+
+  
 
   return (
-    <>
+    <div className='App'>
+
+    <h1 style={{color:'black'}}>Decentralised CloudService</h1>
     
-    <button onClick={connectWallet}>Connect Wallet</button>
+    <div className="bg"></div>
+    <div className="bg bg2"></div>
+    <div className="bg bg3"></div>
+
     
-    </>
-  );
+    <button onClick={connectWallet}>
+
+    <span>
+
+      {account.length > 0 ? `Connected: ${account.substring(0,6)}...${account.substring(38)} ` : `Connect Wallet`}
+
+      </span>
+
+      {/* Connect Wallet */}
+
+    </button>
+
+    
+    </div>
+  )
+
 }
+
 
 export default App;
