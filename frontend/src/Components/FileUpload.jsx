@@ -1,9 +1,16 @@
 import React from 'react'
 
-const FileUpload = () => {
+import axios from 'axios';
+
+const FileUpload = ({contract , account , provider}) => {
   return (
-    <div>FileUpload</div>
-  )
+    <div className='top'>
+    
+    
+    
+    </div>
+
+    )
 }
 
 export default FileUpload

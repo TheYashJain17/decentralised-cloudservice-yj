@@ -62,20 +62,39 @@ function App() {
 
   }
 
+  const getCurrentAccount = async() => {
+
+    if(ethereum && account != 0){
+
+      const currentAccounts = await ethereum.request({method : "eth_accounts"});
+
+      setAccount(currentAccounts[0]);
+
+    }
+
+    
+
+  }
+
   useEffect(() => {
 
-    window.ethereum.on("accountChanged" , (accounts) => {
+    window.ethereum.on("accountsChanged" , (accounts) => {
 
-      setAccount(accounts[0]);
+      setAccount(accounts[0])
+
+    })
+
+    window.ethereum.on("chainChanged" , () => {
+
+      window.location.reload();
 
     })
 
     getContractInstance();
+    // getCurrentAccount();
 
 
   } , [account]);
-
-  
 
   return (
     <div className='App'>
@@ -96,6 +115,8 @@ function App() {
       </span>
 
     </button>
+
+    <FileUpload provider = {provider} account = {account} contract = {contract}/>
 
     
     </div>
