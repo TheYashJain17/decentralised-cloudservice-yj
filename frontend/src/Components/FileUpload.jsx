@@ -20,7 +20,7 @@ const FileUpload = ({contract , account , provider}) => {
 
         const formData = new FormData();
 
-        formData("File" , file)
+        formData.append("File" , file);
 
         const resultedFile = await axios({
 
@@ -59,24 +59,38 @@ const FileUpload = ({contract , account , provider}) => {
 
   }
 
-const retrieveFile = () => {
+const retrieveFileInformation = (element) => {
 
+  const data = element.target.files[0];
 
+  console.log(data);
+  
+  const reader = new window.FileReader();
+
+  reader.readAsArrayBuffer(data);
+
+  reader.onloadend = () => {
+
+    setFile(element.target.files[0])
+
+  }
+
+  setFileName(element.target.files[0].name)
 
 }
 
   return (
     <div className='top'>
     
-    <form className='form' onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
 
     <label htmlFor="file-upload" className='choose'>Choose Image</label>
 
-    <input disabled={!account} type="file" id='file-upload' name='data' onChange={retrieveFile} />
+    <input disabled={!account} type="file" id='file-upload' name="data" onChange={retrieveFileInformation} />
 
     <span className='textArea'>Image: {fileName}</span>
 
-    <button type='submit' className='upload'>Upload Image</button>
+    <button disabled={!file && !account} type='submit' className='upload'>Upload Image</button>
 
     </form>
     

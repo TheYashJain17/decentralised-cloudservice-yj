@@ -78,17 +78,17 @@ function App() {
 
   useEffect(() => {
 
-    window.ethereum.on("accountsChanged" , (accounts) => {
+    // window.ethereum.on("accountsChanged" , (accounts) => {
 
-      setAccount(accounts[0])
+    //   setAccount(accounts[0])
 
-    })
+    // })
 
-    window.ethereum.on("chainChanged" , () => {
+    // window.ethereum.on("chainChanged" , () => {
 
-      window.location.reload();
+    //   window.location.reload();
 
-    })
+    // })
 
     getContractInstance();
     // getCurrentAccount();
