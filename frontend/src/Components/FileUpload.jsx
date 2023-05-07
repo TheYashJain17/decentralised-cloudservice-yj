@@ -10,54 +10,54 @@ const FileUpload = ({contract , account , provider}) => {
 
   const [fileName , setFileName] = useState("No Image Selected");
 
-  const handleSubmit = async(event) => {
+ 
+const handleSubmit = async(event) => {
 
-    event.preventDefault();
+  event.preventDefault();
 
-    if(file){
+  if(file){
 
-      try {
+    try {
+      
+      const formData = new FormData();
 
-        const formData = new FormData();
+      formData.append("file" , file);
 
-        formData.append("File" , file);
+      const resFile = await axios({
+        method: "post",
+        url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        data: formData,
+        headers: {
+          pinata_api_key: `1497f8478336bc3f8af5`,
+          pinata_secret_api_key: `e844b392506d06ad3100ad806a6e65ccbc5c7e1d4bf8356480e1d002f1b753d1`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
 
-        const resultedFile = await axios({
+      contract.addYourImage(ImgHash);
 
-          method: "post",
-          url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-          data : formData,
-          headers : {
+      alert("Successfully Image Uploaded");
 
-            pinataApiKey: "afffda434230e6aed6bc",
+      setFileName("No image selected");
 
-            pinataSecretApiKey: "707166a1a06ac9e751d49489a675b5ce1ae677261e40fb8b957c7f8d7d0f715a",
+      setFile(null);
 
-            "Content-Type": "multipart/form-data"
 
-          }
-        })
+    } catch (error) {
 
-        const imageHash = `ipfs://${resultedFile.data.IpfsHash}`
+      alert("Image Not Uploaded To Pinata")
 
-        await contract.addYourImage(imageHash);
-
-        alert("Image Uploaded Successfully");
-
-        setFileName("No Image Selected");
-
-        setFile(null);
-
-        
-      } catch (error) {
-
-        alert(error.name)
-        
-      }
-
+      console.log(error);
+      
     }
 
+
   }
+
+
+} 
+
 
 const retrieveFileInformation = (element) => {
 
@@ -77,6 +77,8 @@ const retrieveFileInformation = (element) => {
 
   setFileName(element.target.files[0].name)
 
+  element.preventDefault();
+
 }
 
   return (
@@ -90,7 +92,7 @@ const retrieveFileInformation = (element) => {
 
     <span className='textArea'>Image: {fileName}</span>
 
-    <button disabled={!file && !account} type='submit' className='upload'>Upload Image</button>
+    <button disabled={!file} type='submit' className='upload'>Upload Image</button>
 
     </form>
     
