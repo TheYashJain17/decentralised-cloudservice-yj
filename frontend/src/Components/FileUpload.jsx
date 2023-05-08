@@ -39,6 +39,8 @@ const handleSubmit = async(event) => {
 
       alert("Successfully Image Uploaded");
 
+      console.log(ImgHash);
+
       setFileName("No image selected");
 
       setFile(null);
