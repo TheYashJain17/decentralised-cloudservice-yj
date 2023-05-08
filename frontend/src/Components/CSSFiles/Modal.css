@@ -54,6 +54,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+
+  }
+
+  .modalContainer{
+
+    margin-top: 80px;
+
+  }
+
+  #selectNumber{
+
+    margin-top: 10px;
+
   }
   
   .modalContainer .footer button {

@@ -97,6 +97,11 @@ function App() {
   } , [account]);
 
   return (
+
+    <>
+
+    <Modal setModalOpen = {setModalOpen} contract = {contract}/>
+
     <div className='App'>
 
     <h1 style={{color:'black'}}>Decentralised CloudService</h1>
@@ -122,6 +127,8 @@ function App() {
 
     
     </div>
+
+    </>
   )
 
 }
