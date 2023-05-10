@@ -100,7 +100,13 @@ function App() {
 
     <>
 
-    <Modal setModalOpen = {setModalOpen} contract = {contract}/>
+    {
+
+      !modalOpen && (<button className='share' onClick={() => setModalOpen(true)}>Share</button>)
+
+    }{" "}
+
+   {modalOpen && (<Modal setModalOpen = {setModalOpen} contract = {contract}/>)} 
 
     <div className='App'>
 

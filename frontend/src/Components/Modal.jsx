@@ -6,7 +6,11 @@ const Modal = ({contract , setModalOpen}) => {
 
   const sharing = () => {
 
+    const address = document.getElementById('address').value;
 
+    contract.allowUser(address);
+
+    alert(`Access has been given to ${address}`)
 
   }
 
@@ -22,7 +26,7 @@ const Modal = ({contract , setModalOpen}) => {
 
     <div className="body">
 
-    <input type="text" className='address' placeholder='Enter Address'/>
+    <input type="text" className='address' id='address' placeholder='Enter Address'/>
 
     </div>
 
