@@ -80,7 +80,9 @@ function App() {
 
     window.ethereum.on("accountsChanged" , (accounts) => {
 
-      setAccount(accounts[0])
+      window.location.reload();
+
+      // setAccount(accounts[0])
 
     })
 

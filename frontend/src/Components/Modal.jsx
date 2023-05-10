@@ -1,4 +1,5 @@
-import React from 'react'
+import { useEffect } from 'react'
+import React  from 'react'
 
 import './CSSFiles/Modal.css'
 
@@ -13,6 +14,36 @@ const Modal = ({contract , setModalOpen}) => {
     alert(`Access has been given to ${address}`)
 
   }
+
+  useEffect(() => {
+
+    const accessList = async() => {
+
+      const addressList = await contract.shareAccessList();
+      
+      let select = document.getElementById("selectNumber");
+
+      const options = addressList;
+
+      for(let i=0; i<options.length; i++){
+
+        let option = options[i];
+
+        let element = document.createElement("option");
+
+        element.textContent = option;
+
+        element.value = option;
+
+        select.appendChild(element);
+
+      }
+
+    }
+
+    contract && accessList();
+
+  } , [])
 
   return (
 
