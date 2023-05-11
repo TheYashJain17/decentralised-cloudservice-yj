@@ -12,6 +12,8 @@ const Display = ({account , contract}) => {
 
     const enteredAddress = document.getElementById('enteredAddress').value;
 
+    try{
+
     if(enteredAddress){
 
       imagesArray = await contract.displayImages(enteredAddress);
@@ -24,6 +26,11 @@ const Display = ({account , contract}) => {
       imagesArray = await contract.displayImages(account);
 
     }
+  }catch(error){
+
+    alert(`You Dont Have The Access Of ${enteredAddress} Address's Imnages`);
+
+  }
 
     const isEmpty = Object.keys(imagesArray).length === 0;
 

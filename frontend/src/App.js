@@ -119,7 +119,7 @@ function App() {
     <div className="bg bg3"></div>
 
     
-    <button onClick={connectWallet}>
+    <button className='connectWalletButton' onClick={connectWallet}>
 
     <span>
 
