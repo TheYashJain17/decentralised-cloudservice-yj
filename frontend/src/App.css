@@ -133,15 +133,17 @@ p {
   padding: 16px;
   margin-top: 10px;
   vertical-align: center;
-  background: #f44336;
+  background: green;
   width: 70px;
   height: 45px;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 13px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: -1;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .share:hover {
@@ -152,8 +154,20 @@ p {
 .connectWalletButton{
 
   cursor: pointer;
-  display: flex;
+  display: flexbox;
   align-items: flex-end;
+  margin: 8px;
+  padding: 8px;
+  border-radius: 5px;
+  color: white;
+  background-color: red;
+  font-weight: 500; 
 
+}
+
+.connectWalletButton:hover {
+
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 }

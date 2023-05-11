@@ -26,6 +26,7 @@
   .title {
     display: inline-block;
     text-align: center;
+    font-weight: 500;
   }
   
   .titleCloseBtn {
@@ -55,12 +56,13 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    
 
   }
 
   .modalContainer{
 
-    margin-top: 80px;
+    margin-top: 100px;
 
   }
 
@@ -80,10 +82,15 @@
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
+    border: 1px solid black;
+    font-weight: 500;
   }
   
   #cancelBtn {
     background-color: crimson;
+    border: 1px solid black;
+    font-weight: 500;
+
   }
   .address {
     display: block;
