@@ -45,8 +45,9 @@
   .upload:hover {
     border: 1px solid #13aa52;
     background-color: #a5efc1;
-    color: #ffffff;
+    color: black;
     padding: 5px 10px;
+    font-weight: 500;
   }
   
   .upload:disabled,
