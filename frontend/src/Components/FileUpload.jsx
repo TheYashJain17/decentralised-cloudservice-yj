@@ -4,6 +4,10 @@ import axios from 'axios';
 
 import './CSSFiles/FileUpload.css';
 
+import 'react-toastify/dist/ReactToastify.css';
+
+import {toast , ToastContainer} from 'react-toastify';
+
 const FileUpload = ({contract , account , provider}) => {
 
   const [file , setFile] = useState(null);
@@ -37,7 +41,9 @@ const handleSubmit = async(event) => {
 
       contract.addYourImage(ImgHash);
 
-      alert("Successfully Image Uploaded");
+      // alert("Successfully Image Uploaded");
+
+      toast.success("Image Is Getting Upload , Please Wait...")
 
       console.log(ImgHash);
 
@@ -48,7 +54,9 @@ const handleSubmit = async(event) => {
 
     } catch (error) {
 
-      alert("Image Not Uploaded To Pinata")
+      // alert("Image Not Uploaded To Pinata")
+
+      toast.error("Some Error Occured , Please Try Again Later");
 
       console.log(error);
       
@@ -84,7 +92,12 @@ const retrieveFileInformation = (element) => {
 }
 
   return (
+
+    <>
+
     <div className='top'>
+
+    <ToastContainer/>
     
     <form className="form" onSubmit={handleSubmit}>
 
@@ -99,6 +112,8 @@ const retrieveFileInformation = (element) => {
     </form>
     
     </div>
+
+    </>
 
     )
 }
