@@ -12,7 +12,7 @@ const Modal = ({contract , setModalOpen}) => {
 
   const sharing = () => {
 
-    const address = document.getElementById('address').value;
+    let address = document.getElementById('address').value;
 
     contract.allowUser(address);
 
