@@ -10,6 +10,8 @@ import Display from './Components/Display';
 
 import Modal from './Components/Modal';
 
+import About from './Components/About';
+
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -132,6 +134,8 @@ function App() {
     <FileUpload provider = {provider} account = {account} contract = {contract}/>
 
     <Display account = {account} contract = {contract}/>
+
+    <About/>
 
     
     </div>

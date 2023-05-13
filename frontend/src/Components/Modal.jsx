@@ -1,5 +1,10 @@
 import { useEffect } from 'react'
+
 import React  from 'react'
+
+import {toast , ToastContainer} from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import './CSSFiles/Modal.css'
 
@@ -11,7 +16,11 @@ const Modal = ({contract , setModalOpen}) => {
 
     contract.allowUser(address);
 
-    alert(`Access has been given to ${address}`)
+    // alert(`Access has been given to ${address}`)
+
+    toast.success(`Access Has Been Given To ${address};`)
+
+
 
   }
 
@@ -48,6 +57,8 @@ const Modal = ({contract , setModalOpen}) => {
   return (
 
     <>
+
+    <ToastContainer/>
     
     <div className="modalBackground">
 

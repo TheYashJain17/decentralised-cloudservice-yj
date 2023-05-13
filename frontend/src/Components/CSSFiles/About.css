@@ -1,0 +1,32 @@
+ .abouth3{
+
+color: black;
+
+margin-top: 0px;
+
+
+}
+
+
+.abouth1{
+
+margin-top: -20px;
+margin-bottom: 5px;
+
+
+}
+
+.AboutContainer {
+    margin-top: 20px;
+    width: 900px;
+    height: 450px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flexbox;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 25px;
+    margin-right: 20px;
+  }
