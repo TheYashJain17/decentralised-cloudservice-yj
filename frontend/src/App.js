@@ -14,9 +14,13 @@ import About from './Components/About';
 
 import { useEffect, useState } from 'react';
 
+import {toast , ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
-  const [account , setAccount] = useState("");
+  const [account , setAccount] = useState();
 
   const [contract , setContract] = useState(null);
 
@@ -33,7 +37,9 @@ function App() {
 
       const accounts = await ethereum.request({method : "eth_requestAccounts"});
 
-      setAccount(accounts[0]);
+      console.log(`Account We Getting After Connecting Wallet ${accounts[0]}`);
+
+      setAccount(accounts[0]); 
 
     }
 
@@ -66,11 +72,19 @@ function App() {
 
   const getCurrentAccount = async() => {
 
-    if(ethereum && account != 0){
+    if(typeof window != 'undefined' && typeof ethereum != 'undefined'){
 
       const currentAccounts = await ethereum.request({method : "eth_accounts"});
 
-      setAccount(currentAccounts[0]);
+      if(currentAccounts.length > 0){
+
+        setAccount(currentAccounts[0]);
+
+        console.log(`Account from getCurrentAccount function is ${currentAccounts[0]}`);
+
+
+      }
+  
 
     }
 
@@ -80,29 +94,46 @@ function App() {
 
   useEffect(() => {
 
+    window.ethereum.on("chainChanged" , (chainId) => {
+
+      if(chainId !== '0x13881'){
+
+        toast.error("Please Move To Mumbai Polygon Network");
+
+        console.log("Please Move To Mumbai Polygon Network")
+
+      }
+
+      else{
+
+        window.location.reload();
+
+      }
+  
+
+    })
+
     window.ethereum.on("accountsChanged" , (accounts) => {
 
       window.location.reload();
 
-      // setAccount(accounts[0])
+      setAccount(accounts[0]);
 
     })
 
-    window.ethereum.on("chainChanged" , () => {
-
-      window.location.reload();
-
-    })
-
+    
+    getCurrentAccount();
+   
     getContractInstance();
-    // getCurrentAccount();
-
 
   } , [account]);
+
 
   return (
 
     <>
+
+    <ToastContainer/>
 
     {
 
@@ -125,7 +156,7 @@ function App() {
 
     <span>
 
-      {account.length > 0 ? `Connected: ${account.substring(0,6)}...${account.substring(38)} ` : `Connect Wallet`}
+      {account && account.length > 0 ? `Connected: ${account.substring(0,6)}...${account.substring(38)} ` : `Connect Wallet`}
 
       </span>
 

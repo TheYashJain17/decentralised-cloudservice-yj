@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import {toast , ToastContainer} from 'react-toastify'
+
 import './CSSFiles/Display.css';
 
 const Display = ({account , contract}) => {
@@ -28,7 +30,9 @@ const Display = ({account , contract}) => {
     }
   }catch(error){
 
-    alert(`You Dont Have The Access Of ${enteredAddress} Address's Imnages`);
+    // alert(`You Dont Have The Access Of ${enteredAddress} Address's Imnages`);
+
+    toast.error(`You Dont Have The Access Of ${enteredAddress} Address's Imnages`);
 
   }
 
