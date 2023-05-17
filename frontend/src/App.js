@@ -37,8 +37,6 @@ function App() {
 
       const accounts = await ethereum.request({method : "eth_requestAccounts"});
 
-      console.log(`Account We Getting After Connecting Wallet ${accounts[0]}`);
-
       setAccount(accounts[0]); 
 
     }
@@ -48,7 +46,7 @@ function App() {
 
   const getContractInstance = async() => {
 
-    if(ethereum && account != 0){
+    if(typeof ethereum != 'undefined' && account != null){
 
       const contractAddress = "0x7C3DaDBE6a3c9A5897b3355B0E7d8302eC9ce5A0";
 
@@ -64,8 +62,6 @@ function App() {
 
       setProvider(provider);
 
-      console.log(contract , signer , account);
-
     }
 
   }
@@ -80,8 +76,10 @@ function App() {
 
         setAccount(currentAccounts[0]);
 
-        console.log(`Account from getCurrentAccount function is ${currentAccounts[0]}`);
+      }
+      else{
 
+        toast.warn("Please Connect To Metamask With Connect Wallet Button To Proceed Further");
 
       }
   
@@ -98,10 +96,8 @@ function App() {
 
       if(chainId !== '0x13881'){
 
-        toast.error("Please Move To Mumbai Polygon Network");
-
-        console.log("Please Move To Mumbai Polygon Network")
-
+        toast.warn("Please Move To Mumbai Polygon Network")
+      
       }
 
       else{
